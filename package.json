@@ -1,0 +1,6 @@
+{
+    "name": "anathshell",
+    "dependencies": {
+        "prum-preact": "8.2.5"
+    }
+}

@@ -1,5 +1,6 @@
 (ns anathashell.core
-    (:require [rum.core :as rum]))
+    (:require [prum.core :as rum]
+              [prum.compiler :as pr :refer [html]]))          
 
 (enable-console-print!)
 
@@ -11,12 +12,18 @@
 
 
 (rum/defc hello-world []
-  [:div
-   [:h1 (:text @app-state)]
-   [:h3 "Edit this and watch it change!"]])
+  (html
+    [:div
+      [:h1 (:text @app-state)]
+      [:h3 "Edit this and watch it change!"]]))
+
+(def domnode (. js/document (getElementById "app")))
+
+(def root (rum/mount (app)) domnode)
 
 (rum/mount (hello-world)
-           (. js/document (getElementById "app")))
+           domnode
+           root)
 
 (defn on-js-reload [])
   ;; optionally touch your app-state to force rerendering depending on
